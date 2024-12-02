@@ -123,19 +123,19 @@
     <!-- Left Sidebar -->
     <div class="left-sidebar">
         <p style="text-align:center;"> 
-        <img src="patc.png" width="200" height="200" alt="Profile Picture">
+        <img src="{{asset('storage/'.$profile->image)}}" width="180" height="200" alt="Profile Picture">
         <!-- Rounded Box for Personal Information and Contact Information -->
         <div class="rounded-box">
             <h2>Contact Information</h2>
-            <p><i class="fas fa-phone"></i>{{$data['Contact']}}</p>
-            <p><i class="fas fa-envelope"></i>    {{$data['Email']}}</p>
-            <p><i class="fas fa-map-marker-alt"></i>    {{$data['Address']}}</p>
+            <p><i class="fas fa-phone"></i>{{$profile->phoneNumber}}</p>
+            <p><i class="fas fa-envelope"></i>{{$profile->email}}</p>
+            <p><i class="fas fa-map-marker-alt"></i>    {{$profile->Placeofbirth}}</p>
         </div>
         <div class="skills-box">
-            {{$data['skills']}}
             <h2>Skills</h2>
             <ul class="skills">
-                <li>Photo Editing</li>
+            {{$profile->skills}}
+                <!-- <li>Photo Editing</li>
                 <li>Logo Designer</li>
                 <li>Microsoft PowerPoint/Excel/Word</li>
                 <li>Vector Artist</li>
@@ -143,16 +143,16 @@
                 <li>Adobe Photoshop</li>
                 <li>Adobe Illustrator</li>
                 <li>UI/UX Designer</li>
-                <li>Programmer</li>
+                <li>Programmer</li> -->
             </ul>
         </div>
         <br>
         <div class="certification-box">
-            {{$data['certification']}} 
+            
             <h2>Certification</h2>
             <ul class="certification">
-                <li>Passer of National Certificate NC III Visual Graphic Design - August 24, 2019</li>
-                <li>Udemy Training Adobe Photoshop CC Fundamentals and Essentials Training - September 16, 2021</li>
+                <li>{{$profile->certification_title}} - {{date('F j, Y',strtotime($profile->certification_date))}}</li>
+                <!-- <li>Udemy Training Adobe Photoshop CC Fundamentals and Essentials Training - September 16, 2021</li> -->
             </ul>
         </div>
     </div>
@@ -160,32 +160,30 @@
     <div class="main-content">
         <div class="body">
             <div class="statement">
-                <h1>   {{$data['Name']}}</h1>
-                <p>To obtain a position that will enable me to use my skills, experience, and ability to work well with people.</p>
-            {{$data['Objective']}}
+                <h1>   {{ucwords($profile->Name)}}</h1>
+                <p>{{$profile->Objectives}}</p>
+            
             </div>
         </div>
         <div class="section">
-            {{$data['Personal Information']}}
+            
             <h2> PERSONAL INFORMATION</h2>
-            <p>Date of Birth: January 25, 2000</p>
-            <p>Place of Birth: Calawitan, San Ildefonso, Bulacan</p>
-            <p>Gender: Female</p>
-            <p>Civil Status: Single</p>
-            <p>Religion: Jehovah Witness</p>
-            <p>Citizenship: Filipino</p>
+            <p>Date of Birth: {{date('F j, Y',strtotime($profile->Dateofbirth))}}</p>
+            <p>Place of Birth: {{$profile->Placeofbirth}}</p>
+            <p>Gender: {{$profile->gender}}</p>
+            <p>Civil Status: {{$profile->Civilstatus}}</p>
+            <p>Religion: {{$profile->Religion}}</p>
+            <p>Citizenship: {{$profile->Citizenship}}</p>
             
             <h2>EDUCATION</h2>
-             {{$data['education']}} 
+             
             <ul class="education">
 
                 <li>
-                    <span>Baliwag Polytechnic College (BTECH) <br> Bachelor of Science in Information
-                        Technology</span>
-                    <span class="date">2024</span>
-                    
+                    <span>{{$profile->institute}} <br> {{$profile->degree}}</span>
+                    <span class="date">2024</span>                   
                 </li>
-                <li>
+                <!-- <li>
                     <span>Integrated College of Business and Technology <br>Information Technology</span>
                     <span class="date">2018-2020</span>
                 </li>
@@ -196,38 +194,38 @@
                 <li>
                     <span>Secondary Education: Carlos F. Gonzales High School, Maguinao, San Rafael, Bulacan</span>
                     <span class="date">2012-2015</span>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="section">
-            {{$data['experience']}} 
+           
             <h2>EXPERIENCE</h2>
             <ul class="experience">
            
                 <li>
-                    <span>Call Center Agent Non-voice - Infinite Frontline Communication</span>
-                    <span class="date">2023</span>
+                    <span>{{$profile->jobTitle}} - {{$profile->organization}}</span>
+                    <span class="date">{{$profile->startdate}}-{{$profile->enddate}}</span>
                 </li>
-                <li>
+                <!-- <li>
                     <span>Clerk - Garlang San Ildefonso Bulacan</span>
                     <span class="date">2018-2020</span>
                 </li>
                 <li>
                     <span>Secretary (Eurasia Pharma Corporation) San Leonardo Nueva Ecija</span>
                     <span class="date">2020</span>
-                </li>
+                </li> -->
                 </ul>
         </div>
         <div class="section">
-            {{$data['character references']}} 
+            
             <h2>CHARACTER REFERENCES</h2>
             <ul class="references">
-                <li>Herminio M. Cruz </li>
-                Barangay Garlang Captain <br>
+                <li>{{$profile->Characterreference}} </li>
+                <!-- Barangay Garlang Captain <br>
                 09551167017
-                <br>
+                <br> -->
 
-                <li>Rowena O. Caysido </li>
+                <!-- <li>Rowena O. Caysido </li>
                 Barangay Garlang Secretary
                 <br>
                 09159005989
@@ -235,11 +233,11 @@
                  Barangay Garlang BHW
                  <br>
                  09296862304
-                 <br>
+                 <br> -->
                  
-                 <hr style="margin-top: 20px; border: 1px solid #333; width: 200px; margin-left: auto; margin-right: auto;"> <!-- Adds a line with a fixed width -->
+                 <!-- <hr style="margin-top: 20px; border: 1px solid #333; width: 200px; margin-left: auto; margin-right: auto;"> Adds a line with a fixed width -->
 
-                <p style="text-align: center; font-weight: bold; margin-top: 10px;">PATRICIA ANN CASTRO</p> <!-- Name centered below the line -->
+                <!-- <p style="text-align: center; font-weight: bold; margin-top: 10px;">PATRICIA ANN CASTRO</p> Name centered below the line -->
                  
             </ul>
         </div>
